@@ -4,11 +4,7 @@
 
 This is the Mario Kart project that makes use of PanGesture and animations
 
-
-
-
-![MarioKart](https://github.com/Jack-Camas/MarioKart-Swift/assets/48427524/035a94f2-c33b-4a0a-8aed-6094a0139a9d)
-
+![ezgif com-resize](https://github.com/Jack-Camas/MarioKart-Swift/assets/48427524/268c97c1-133b-4b76-a525-f885cff549d4)
 
 ### Features
 - [x] Double-tapping a kart should animate it off the screen
