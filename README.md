@@ -6,7 +6,7 @@ This is the Mario Kart project that makes use of PanGesture and animations
 
 ### Features
 - [x] Double-tapping a kart should animate it off the screen
-- [x]Turning a kart using two fingers should rotate the kart
+- [x] Turning a kart using two fingers should rotate the kart
 - [x] Pinching a kart using two fingers should enlarge/shrink the kart
 - [x] Panning the kart should move it based on the location of the gesture
 - [x] Long-pressing the background should reset the position and state of the karts
