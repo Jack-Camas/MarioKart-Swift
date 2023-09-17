@@ -4,6 +4,8 @@
 
 This is the Mario Kart project that makes use of PanGesture and animations
 
+![](https://www.loom.com/share/59acba464b02492ca4f4484da4e4fab5?sid=ed7fa956-ae10-4ebc-99d2-2129c8583f6f)
+
 ### Features
 - [x] Double-tapping a kart should animate it off the screen
 - [x] Turning a kart using two fingers should rotate the kart
