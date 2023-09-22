@@ -9,17 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController,
-                      UIGestureRecognizerDelegate {
-  
+                      UIGestureRecognizerDelegate,
+                      SettingsViewControllerDelegate {
   // Bowser
   @IBOutlet weak var kartView0: UIImageView!
   // Mario
   @IBOutlet weak var kartView1: UIImageView!
   // Toad
   @IBOutlet weak var kartView2: UIImageView!
+  // Mushroom
+  @IBOutlet weak var mushroomView: UIImageView!
+  // Mystery Box
+  @IBOutlet weak var mysteryBox: UIImageView!
   
   // Keeps track of the original position of the karts when the view is initially loaded
-  private var originalKartCenters = [CGPoint]()
+  var originalKartCenters = [CGPoint]()
+  // Acts as a multiplier to determine how fast to translate the kart
+  private var speedMultiplier = 1.0
+  // Settings applied from the settings screen
+  var settings: [String: Any]?
   
   // Called when the view controller has awakened and is finished
   // setting up it's views
@@ -33,60 +41,7 @@ class ViewController: UIViewController,
   
   //  Called when user double-taps a kart
   @IBAction func didDoubleTapKart(_ sender: UITapGestureRecognizer) {
-    // Exercise 1: Move the kart forward past the edge of the screen
-    // Tip: Use the `translate` function below
-    // YOUR CODE HERE
-    
-    // Exercise 6: Move the kart back to its original position after you've moved it off the screen
-    // Tip: Change your usage of the `translate` function to
-    // use the optional completion closure
-    // YOUR CODE HERE
-	  translate(kart: sender.view, by: view.frame.width) {
-		  self.translate(kart: sender.view, by: -self.view.frame.width, animationDuration: 2.0)
-	  }
-  }
-  
-  private func translate(kart: UIView?,
-                         by xPosition: Double,
-                         animationDuration: Double = 0.6,
-                         completion: (() -> Void)? = nil) {
-    guard let kart = kart else { return }
-    UIView.animateKeyframes(withDuration: animationDuration, delay: 0.0) {
-      kart.center.x = kart.center.x + xPosition
-    } completion: { finished in
-      completion?()
-    }
-  }
-  
-  // Called when the user rotates a kart
-  @IBAction func didRotateKart(_ sender: UIRotationGestureRecognizer) {
-    // Exercise 2: Rotate the kart
-    // Tip: Use the `rotate` function below
-    // YOUR CODE HERE
-	  rotate(kart: sender.view, gestureRecognizer: sender)
-  }
-  
-  private func rotate(kart: UIView?,
-                      gestureRecognizer: UIRotationGestureRecognizer) {
-    guard let kart = kart else { return }
-    kart.transform = kart.transform.rotated(by: gestureRecognizer.rotation)
-    gestureRecognizer.rotation = 0
-  }
-  
-  // Called when the user pinches a kart
-  @IBAction func didPinchKart(_ sender: UIPinchGestureRecognizer) {
-    // Exercise 3: Change the scale of the kart
-    // Tip: Use the `scale` function below
-    // YOUR CODE HERE
-	  scale(kart: sender.view, gestureRecognizer: sender)
-  }
-  
-  private func scale(kart: UIView?,
-                     gestureRecognizer: UIPinchGestureRecognizer) {
-    guard let kart = kart else { return }
-    kart.transform = kart.transform.scaledBy(x: gestureRecognizer.scale,
-                                             y: gestureRecognizer.scale)
-    gestureRecognizer.scale = 1
+    translate(kart: sender.view, by: view.frame.width)
   }
   
   // Called when the user pans on a kart
@@ -94,99 +49,100 @@ class ViewController: UIViewController,
     moveKart(using: sender)
   }
   
-  // Exercise 4: Implement the `moveKart` function to move the kart based on the
-  // location of the location of the gesture in the view
-  private func moveKart(using gestureRecognizer: UIPanGestureRecognizer) {
-    // YOUR CODE HERE
-	  let location = gestureRecognizer.location(in: view)
-	  let kartView = gestureRecognizer.view
-	  kartView?.center = location
-  }
-  
+  // Called when the user long-presses on the background
   @IBAction func didLongPressBackground(_ sender: UILongPressGestureRecognizer) {
     if sender.state == .began {
       resetKarts()
     }
   }
   
-  // Exercise 5: Implement `resetKarts` to reset the size and positioning of the karts
-  private func resetKarts() {
-    // YOUR CODE HERE
-	  UIView.animate(withDuration: 0.4) {
-		  self.kartView0.transform = .identity
-		  self.kartView1.transform = .identity
-		  self.kartView2.transform = .identity
-		  
-		  self.kartView0.center = self.originalKartCenters[0]
-		  self.kartView1.center = self.originalKartCenters[1]
-		  self.kartView2.center = self.originalKartCenters[2]
-	  }
+  
+  // Called when user taps on the mushroom
+  @IBAction func didTapMushroom(_ sender: UITapGestureRecognizer) {
+    animateMushroom()
+    
+    // Exercise 1: Assign the result of MushroomGenerator.maybeGenerateMushroomPowerup()
+    // to a variable. Print something if it's not nil
+    // ...
+    
+    // Exercise 2: Use the powerup on Mario using the useMushroomPowerupOnMario function
+    // ...
   }
   
-  // Called whenever the view becomes visible on the screen
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-	  runStartingAnimationsOneByOne {
-		  //self.raceKartsWithSameSpeed()
-		  self.raceKartsWithRandomizedSpeed()
-	  }
+  private func useMushroomPowerupOnMario(powerup: MushroomPowerup) {
+    scale(kart: kartView1)
   }
   
-  private func getKartReadyToRace(kart: UIImageView,
-                                  completion: (() -> Void)? = nil) {
-    UIView.animateKeyframes(
-      withDuration: 0.6,
-      delay: 0.0,
-      animations: {
-        kart.center.x = kart.center.x + 20
-      },
-      completion: { _ in
-        completion?()
-      })
+  // This function is called when the user taps on the mystery box
+  @IBAction func didTapMysteryBox(_ sender: UITapGestureRecognizer) {
+    animateMysteryBox()
+    let mysteryBox = MysteryBoxGenerator.generateMysteryBox()
+    decipher(mysteryBox: mysteryBox)
   }
   
-  // Exercise 7: Animate all karts all at once as if they were getting ready for a race
-  // Tip: Use `getKartReadyToRace`
-  private func runStartingAnimationsAllAtOnce() {
-    // YOUR CODE HERE
-	  getKartReadyToRace(kart: kartView0)
-	  getKartReadyToRace(kart: kartView1)
-	  getKartReadyToRace(kart: kartView2)
+  // Exercise 3: Decipher the mystery box and apply the correct effect on mario
+  private func decipher(mysteryBox: MysteryBox) {
+    
   }
   
-  // Exercise 8: Animate all karts one-by-one
-  // Tip: Use `getKartReadyToRace` and its completion closure
-  private func runStartingAnimationsOneByOne(completion: (() -> Void)? = nil) {
-    // YOUR CODE HERE
-	  getKartReadyToRace(kart: kartView0) {
-		  self.getKartReadyToRace(kart: self.kartView1) {
-			  self.getKartReadyToRace(kart: self.kartView2) {
-				  completion?()
-			  }
-		  }
-	  }
+  private func translate(kart: UIView?,
+                         by xPosition: Double) {
+    guard let kart = kart else { return }
+    UIView.animateKeyframes(withDuration: 0.5 - 0.05 * Double(speedMultiplier),
+                            delay: 0.0) {
+      kart.center.x = kart.center.x + xPosition
+    }
   }
   
-  // Exercise 9: Have the karts race all at once to the finish line!
-  // Tip: Use the `translate` function above
-  private func raceKartsWithSameSpeed() {
-    // YOUR CODE HERE
-	  translate(kart: kartView0, by: view.frame.width, animationDuration: 0.9)
-	  translate(kart: kartView1, by: view.frame.width, animationDuration: 0.9)
-	  translate(kart: kartView2, by: view.frame.width, animationDuration: 0.9)
+  private func rotate(kart: UIView) {
+    UIView.animate(withDuration: 0.25) {
+      self.kartView1.transform = self.kartView1.transform.rotated(by: 180.0)
+    }
   }
   
-  // Exercise 10: Have the karts race all at once to the finish line!
-  // Tip: Use the `translate` function above
-  private func raceKartsWithRandomizedSpeed() {
-    // YOUR CODE HERE
-	  let random1 = Double.random(in: 0.5...5.0)
-	  let random2 = Double.random(in: 0.5...5.0)
-	  let random3 = Double.random(in: 0.5...5.0)
-	  
-	  translate(kart: kartView0, by: view.frame.width, animationDuration: random1)
-	  translate(kart: kartView1, by: view.frame.width, animationDuration: random2)
-	  translate(kart: kartView2, by: view.frame.width, animationDuration: random3)
+  private func scale(kart: UIView) {
+    UIView.animate(withDuration: 0.25) {
+      self.kartView1.transform = self.kartView1.transform.scaledBy(x: 1.05, y: 1.05)
+    }
+  }
+  
+  // Called with the user taps on the settings button
+  @IBAction func didTapSettingsButton(_ sender: UIButton) {
+    performSegue(withIdentifier: "SettingsViewControllerSegue", sender: nil)
+  }
+  
+  // Prepare the settings screen before showing it to the user
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "SettingsViewControllerSegue" {
+      let navigationController = segue.destination as! UINavigationController
+      let viewController = navigationController.topViewController as! SettingsViewController
+      viewController.delegate = self
+      viewController.preloadedSettings = settings
+    }
+  }
+  
+  // Applies the correct settings after exiting the settings screen
+  // This function is called before dismissing the settings screen
+  func didChangeSettings(settings: [String : Any]) {
+    self.settings = settings
+    applyNumKartsSetting(settings)
+    applyKartSizeSetting(settings)
+    applySpeedMultiplierSetting(settings)
+  }
+  
+  // Exercise 4: Implement applyNumKartsSetting to show the correct number of karts
+  func applyNumKartsSetting(_ settings: [String : Any]) {
+    
+  }
+  
+  // Exercise 5: Implement applyKartSizeSetting to set the correct kart size
+  func applyKartSizeSetting(_ settings: [String : Any]) {
+    
+  }
+  
+  // Exercise 6: Implement applySpeedMultiplierSetting to set the correct speed
+  func applySpeedMultiplierSetting(_ settings: [String : Any]) {
+    
   }
 }
 

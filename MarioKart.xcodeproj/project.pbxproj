@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9914CF6229BBF1EB00CFA3F1 /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914CF6129BBF1EB00CFA3F1 /* ViewController+Extensions.swift */; };
+		9914CF6629BBF3B400CFA3F1 /* MushroomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914CF6529BBF3B400CFA3F1 /* MushroomGenerator.swift */; };
+		9914CF6829BBF80300CFA3F1 /* MysteryBoxGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914CF6729BBF80300CFA3F1 /* MysteryBoxGenerator.swift */; };
+		99B92A5329BE8A0800E5FFFB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B92A5229BE8A0800E5FFFB /* SettingsViewController.swift */; };
 		ED0D9C0321FBD96E0040BA87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0D9C0221FBD96E0040BA87 /* AppDelegate.swift */; };
 		ED0D9C0521FBD96E0040BA87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0D9C0421FBD96E0040BA87 /* ViewController.swift */; };
 		ED0D9C0821FBD96E0040BA87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0D9C0621FBD96E0040BA87 /* Main.storyboard */; };
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9914CF6129BBF1EB00CFA3F1 /* ViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
+		9914CF6529BBF3B400CFA3F1 /* MushroomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MushroomGenerator.swift; sourceTree = "<group>"; };
+		9914CF6729BBF80300CFA3F1 /* MysteryBoxGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MysteryBoxGenerator.swift; sourceTree = "<group>"; };
+		99B92A5229BE8A0800E5FFFB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ED0D9BFF21FBD96E0040BA87 /* MarioKart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarioKart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0D9C0221FBD96E0040BA87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED0D9C0421FBD96E0040BA87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +82,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9914CF6029BBF1B800CFA3F1 /* DO_NOT_MODIFY */ = {
+			isa = PBXGroup;
+			children = (
+				9914CF6129BBF1EB00CFA3F1 /* ViewController+Extensions.swift */,
+				9914CF6529BBF3B400CFA3F1 /* MushroomGenerator.swift */,
+				9914CF6729BBF80300CFA3F1 /* MysteryBoxGenerator.swift */,
+				ED0D9C0221FBD96E0040BA87 /* AppDelegate.swift */,
+				ED0D9C0B21FBD9710040BA87 /* LaunchScreen.storyboard */,
+				99B92A5229BE8A0800E5FFFB /* SettingsViewController.swift */,
+				ED0D9C0621FBD96E0040BA87 /* Main.storyboard */,
+				ED0D9C0921FBD9710040BA87 /* Assets.xcassets */,
+			);
+			path = DO_NOT_MODIFY;
+			sourceTree = "<group>";
+		};
 		ED0D9BF621FBD96D0040BA87 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +120,8 @@
 		ED0D9C0121FBD96E0040BA87 /* MarioKart */ = {
 			isa = PBXGroup;
 			children = (
-				ED0D9C0221FBD96E0040BA87 /* AppDelegate.swift */,
+				9914CF6029BBF1B800CFA3F1 /* DO_NOT_MODIFY */,
 				ED0D9C0421FBD96E0040BA87 /* ViewController.swift */,
-				ED0D9C0621FBD96E0040BA87 /* Main.storyboard */,
-				ED0D9C0921FBD9710040BA87 /* Assets.xcassets */,
-				ED0D9C0B21FBD9710040BA87 /* LaunchScreen.storyboard */,
 				ED0D9C0E21FBD9710040BA87 /* Info.plist */,
 			);
 			path = MarioKart;
@@ -257,7 +277,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED0D9C0521FBD96E0040BA87 /* ViewController.swift in Sources */,
+				9914CF6629BBF3B400CFA3F1 /* MushroomGenerator.swift in Sources */,
+				9914CF6829BBF80300CFA3F1 /* MysteryBoxGenerator.swift in Sources */,
+				9914CF6229BBF1EB00CFA3F1 /* ViewController+Extensions.swift in Sources */,
 				ED0D9C0321FBD96E0040BA87 /* AppDelegate.swift in Sources */,
+				99B92A5329BE8A0800E5FFFB /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CBXAQN69JX;
 				INFOPLIST_FILE = MarioKart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CBXAQN69JX;
 				INFOPLIST_FILE = MarioKart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
