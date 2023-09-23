@@ -66,7 +66,10 @@ class ViewController: UIViewController,
     // ...
     
     // Exercise 2: Use the powerup on Mario using the useMushroomPowerupOnMario function
-    // ...
+	  
+	  if let powerUp = MushroomGenerator.maybeGenerateMushroomPowerup() {
+		  useMushroomPowerupOnMario(powerup: powerUp)
+	  }
   }
   
   private func useMushroomPowerupOnMario(powerup: MushroomPowerup) {
