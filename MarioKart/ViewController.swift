@@ -85,7 +85,26 @@ class ViewController: UIViewController,
   
   // Exercise 3: Decipher the mystery box and apply the correct effect on mario
   private func decipher(mysteryBox: MysteryBox) {
-    
+	  guard let effectDictionary = mysteryBox.mysteryEffect as? [String:String] else {
+		  assertionFailure("Expected Value of type dictionary")
+		  return
+	  }
+	  
+	  guard let effect = effectDictionary["effect"] else {
+		  assertionFailure("Expected Value of type dictionary")
+		  return
+	  }
+	  
+	  if effect == "translate" {
+		  translate(kart: kartView1, by: view.bounds.width)
+	  } else if effect == "rotate" {
+		  rotate(kart: kartView1)
+	  } else if effect == "scale" {
+		  scale(kart: kartView1)
+	  } else {
+		  assertionFailure("Unexpected Effect")
+	  }
+	  
   }
   
   private func translate(kart: UIView?,
