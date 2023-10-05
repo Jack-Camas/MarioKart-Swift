@@ -165,7 +165,16 @@ class ViewController: UIViewController,
   
   // Exercise 5: Implement applyKartSizeSetting to set the correct kart size
   func applyKartSizeSetting(_ settings: [String : Any]) {
-    
+	  guard let kartSizeMulti = settings["kartSize"] as? Int else {
+		  assertionFailure("Expected Int, but got nil")
+		  return
+	  }
+	  let kartSize = 1.0 + 0.05 *  Double(kartSizeMulti)
+	  print(kartSize)
+	  let transform = CGAffineTransformIdentity.scaledBy(x: kartSize, y: kartSize)
+	  kartView0.transform = transform
+	  kartView1.transform = transform
+	  kartView2.transform = transform
   }
   
   // Exercise 6: Implement applySpeedMultiplierSetting to set the correct speed
